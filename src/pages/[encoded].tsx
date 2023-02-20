@@ -39,9 +39,12 @@ const Event: NextPage<Props> = (props) => {
     if (event) {
       const text = `${event.title}
 ${format(event.start)}
-
-${event?.description}
-
+${
+  event?.description
+    ? `${event.description}
+`
+    : ""
+}
 Lisää tapahtuma kalenteriisi:
 ${window.location.href}`;
 
