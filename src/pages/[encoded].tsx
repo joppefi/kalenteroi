@@ -83,7 +83,7 @@ const Event: NextPage<Props> = (props) => {
             startDate={event.start}
             endDate={event.end}
             location={event.location}
-            options={["Google", "Apple", "Microsoft365", "Outlook.com"]}
+            options={["Google", "Microsoft365", "Outlook.com", "ical"]}
           />
         </>
       )}
