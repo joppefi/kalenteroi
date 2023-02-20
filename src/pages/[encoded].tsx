@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
+import { Stat, StatLabel, StatNumber } from "@chakra-ui/react";
 
 interface Props {}
 
@@ -24,20 +25,46 @@ const Event: NextPage<Props> = (props) => {
   }, [router.query.encoded]);
 
   return (
-    <div>
-      {JSON.stringify(event)}
-
+    <>
       {event && (
-        <AddToCalendarButton
-          name={event.title}
-          description={event.description}
-          startDate={event.start}
-          endDate={event.end}
-          location={event.location}
-          options={["google", "apple"]}
-        />
+        <>
+          <Stat w="full">
+            <StatLabel>Title</StatLabel>
+            <StatNumber>{event.title}</StatNumber>
+          </Stat>
+          {event.description && (
+            <Stat w="full">
+              <StatLabel>Description</StatLabel>
+              <StatNumber>{event.description}</StatNumber>
+            </Stat>
+          )}
+          <Stat w="full">
+            <StatLabel>Starts</StatLabel>
+            <StatNumber>{event.start}</StatNumber>
+          </Stat>
+          {event.end && (
+            <Stat w="full">
+              <StatLabel>Ends</StatLabel>
+              <StatNumber>{event.end}</StatNumber>
+            </Stat>
+          )}
+          {event.location && (
+            <Stat w="full">
+              <StatLabel>Location</StatLabel>
+              <StatNumber>{event.location}</StatNumber>
+            </Stat>
+          )}
+          <AddToCalendarButton
+            name={event.title}
+            description={event.description}
+            startDate={event.start}
+            endDate={event.end}
+            location={event.location}
+            options={["Google", "Apple", "Microsoft365", "Outlook.com"]}
+          />
+        </>
       )}
-    </div>
+    </>
   );
 };
 
