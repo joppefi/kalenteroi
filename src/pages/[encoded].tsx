@@ -29,32 +29,33 @@ const Event: NextPage<Props> = (props) => {
       {event && (
         <>
           <Stat w="full">
-            <StatLabel>Title</StatLabel>
+            <StatLabel>Tapahtuma</StatLabel>
             <StatNumber>{event.title}</StatNumber>
           </Stat>
           {event.description && (
             <Stat w="full">
-              <StatLabel>Description</StatLabel>
+              <StatLabel>Kuvaus</StatLabel>
               <StatNumber>{event.description}</StatNumber>
             </Stat>
           )}
           <Stat w="full">
-            <StatLabel>Starts</StatLabel>
+            <StatLabel>Alkaa</StatLabel>
             <StatNumber>{event.start}</StatNumber>
           </Stat>
           {event.end && (
             <Stat w="full">
-              <StatLabel>Ends</StatLabel>
+              <StatLabel>Päättyy</StatLabel>
               <StatNumber>{event.end}</StatNumber>
             </Stat>
           )}
           {event.location && (
             <Stat w="full">
-              <StatLabel>Location</StatLabel>
+              <StatLabel>Paikka</StatLabel>
               <StatNumber>{event.location}</StatNumber>
             </Stat>
           )}
           <AddToCalendarButton
+            label="Lisää kalenteriisi"
             name={event.title}
             description={event.description}
             startDate={event.start}

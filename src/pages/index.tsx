@@ -32,7 +32,7 @@ const Home = () => {
           <Field name="title">
             {({ field }: FieldAttributes<FormValues>) => (
               <FormControl>
-                <FormLabel>Title</FormLabel>
+                <FormLabel>Tapahtuman nimi</FormLabel>
                 <Input {...field}></Input>
               </FormControl>
             )}
@@ -41,7 +41,7 @@ const Home = () => {
           <Field name="description">
             {({ field }: FieldAttributes<FormValues>) => (
               <FormControl>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>Kuvaus</FormLabel>
                 <Textarea {...field}></Textarea>
               </FormControl>
             )}
@@ -50,7 +50,7 @@ const Home = () => {
           <Field name="start">
             {({ field }: FieldAttributes<FormValues>) => (
               <FormControl>
-                <FormLabel>Start date</FormLabel>
+                <FormLabel>Alkaa</FormLabel>
                 <Input {...field}></Input>
               </FormControl>
             )}
@@ -59,7 +59,7 @@ const Home = () => {
           <Field name="end">
             {({ field }: FieldAttributes<FormValues>) => (
               <FormControl>
-                <FormLabel>End date</FormLabel>
+                <FormLabel>Päättyy</FormLabel>
                 <Input {...field}></Input>
               </FormControl>
             )}
@@ -68,14 +68,14 @@ const Home = () => {
           <Field name="location">
             {({ field }: FieldAttributes<FormValues>) => (
               <FormControl>
-                <FormLabel>Location</FormLabel>
+                <FormLabel>Paikka</FormLabel>
                 <Input {...field}></Input>
               </FormControl>
             )}
           </Field>
 
           <Button w="full" marginTop="4" type="submit">
-            Create
+            Luo tapahtuma
           </Button>
         </Form>
       )}
