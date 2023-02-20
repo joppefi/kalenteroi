@@ -8,13 +8,17 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { Field, Form, Formik, FieldAttributes } from "formik";
+import { decode, encode } from "@/utils/json";
+import { useRouter } from "next/router";
 
 type FormValues = any;
 
 const Home = () => {
-  const handleSubmit = (values) => {
-    console.log(values);
-    console.log(JSON.stringify(values));
+  const router = useRouter();
+
+  const handleSubmit = async (values) => {
+    const encoded = await encode(values);
+    router.push(`/${encoded}`);
   };
 
   return (
@@ -43,15 +47,33 @@ const Home = () => {
             )}
           </Field>
 
-          <FormControl>
-            <FormLabel>Start date</FormLabel>
-            <Input></Input>
-          </FormControl>
+          <Field name="start">
+            {({ field }: FieldAttributes<FormValues>) => (
+              <FormControl>
+                <FormLabel>Start date</FormLabel>
+                <Input {...field}></Input>
+              </FormControl>
+            )}
+          </Field>
 
-          <FormControl>
-            <FormLabel>End date</FormLabel>
-            <Input></Input>
-          </FormControl>
+          <Field name="end">
+            {({ field }: FieldAttributes<FormValues>) => (
+              <FormControl>
+                <FormLabel>End date</FormLabel>
+                <Input {...field}></Input>
+              </FormControl>
+            )}
+          </Field>
+
+          <Field name="location">
+            {({ field }: FieldAttributes<FormValues>) => (
+              <FormControl>
+                <FormLabel>Location</FormLabel>
+                <Input {...field}></Input>
+              </FormControl>
+            )}
+          </Field>
+
           <Button w="full" marginTop="4" type="submit">
             Create
           </Button>
