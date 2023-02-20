@@ -34,7 +34,7 @@ const Home = () => {
       initialValues={{
         title: "",
         description: undefined,
-        start: new Date().toISOString(),
+        start: new Date(new Date().setMinutes(0, 0, 0)).toISOString(),
         end: undefined,
         location: undefined,
       }}
