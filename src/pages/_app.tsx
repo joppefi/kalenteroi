@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
       <VStack
         margin="auto"
-        w="lg"
+        w={{ sm: "full", md: "lg" }}
         backgroundColor="white"
         borderRadius="md"
         dropShadow="outline"
