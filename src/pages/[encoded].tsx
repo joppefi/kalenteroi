@@ -3,8 +3,16 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
-import { Stat, StatLabel, StatNumber, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Stat,
+  StatLabel,
+  StatNumber,
+  Text,
+  useClipboard,
+} from "@chakra-ui/react";
 import { FormValues } from ".";
+import { format } from "@/utils/date";
 
 interface Props {}
 
@@ -12,6 +20,8 @@ const Event: NextPage<Props> = (props) => {
   const router = useRouter();
 
   const [event, setEvent] = useState<null | FormValues>(null);
+
+  const { setValue, onCopy } = useClipboard("");
 
   useEffect(() => {
     const decodeParams = async () => {
@@ -24,6 +34,21 @@ const Event: NextPage<Props> = (props) => {
       decodeParams();
     }
   }, [router.query.encoded]);
+
+  useEffect(() => {
+    if (event) {
+      const text = `${event.title}
+${format(event.start)}
+
+${event?.description}
+
+Lisää tapahtuma kalenteriisi:
+${window.location.href}`;
+
+      setValue(text);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [event]);
 
   return (
     <>
@@ -41,30 +66,12 @@ const Event: NextPage<Props> = (props) => {
           )}
           <Stat w="full">
             <StatLabel>Alkaa</StatLabel>
-            <StatNumber>
-              {new Date(event.start).toLocaleDateString("fi-fi", {
-                weekday: "short",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-                hour: "numeric",
-                minute: "numeric",
-              })}
-            </StatNumber>
+            <StatNumber>{format(event.start)}</StatNumber>
           </Stat>
           {event.end && (
             <Stat w="full">
               <StatLabel>Päättyy</StatLabel>
-              <StatNumber>
-                {new Date(event.end).toLocaleDateString("fi-fi", {
-                  weekday: "short",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                  hour: "numeric",
-                  minute: "numeric",
-                })}
-              </StatNumber>
+              <StatNumber>{format(event.end)}</StatNumber>
             </Stat>
           )}
           {event.location && (
@@ -85,6 +92,9 @@ const Event: NextPage<Props> = (props) => {
             location={event.location}
             options={["Google", "Microsoft365", "Outlook.com", "ical"]}
           />
+          <Button variant="ghost" onClick={onCopy}>
+            Kopioi leikepöydälle
+          </Button>
         </>
       )}
     </>
