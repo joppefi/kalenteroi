@@ -41,12 +41,30 @@ const Event: NextPage<Props> = (props) => {
           )}
           <Stat w="full">
             <StatLabel>Alkaa</StatLabel>
-            <StatNumber>{event.start}</StatNumber>
+            <StatNumber>
+              {new Date(event.start).toLocaleDateString("fi-fi", {
+                weekday: "short",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+              })}
+            </StatNumber>
           </Stat>
           {event.end && (
             <Stat w="full">
               <StatLabel>Päättyy</StatLabel>
-              <StatNumber>{event.end}</StatNumber>
+              <StatNumber>
+                {new Date(event.end).toLocaleDateString("fi-fi", {
+                  weekday: "short",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "numeric",
+                })}
+              </StatNumber>
             </Stat>
           )}
           {event.location && (
