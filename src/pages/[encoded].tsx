@@ -3,14 +3,15 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
-import { Stat, StatLabel, StatNumber } from "@chakra-ui/react";
+import { Stat, StatLabel, StatNumber, Text } from "@chakra-ui/react";
+import { FormValues } from ".";
 
 interface Props {}
 
 const Event: NextPage<Props> = (props) => {
   const router = useRouter();
 
-  const [event, setEvent] = useState(null);
+  const [event, setEvent] = useState<null | FormValues>(null);
 
   useEffect(() => {
     const decodeParams = async () => {
@@ -54,6 +55,9 @@ const Event: NextPage<Props> = (props) => {
               <StatNumber>{event.location}</StatNumber>
             </Stat>
           )}
+          <Text mt="4 !important">
+            Lisää tapahtuma kalenteriisi allaolevalla painikkeella
+          </Text>
           <AddToCalendarButton
             label="Lisää kalenteriisi"
             name={event.title}

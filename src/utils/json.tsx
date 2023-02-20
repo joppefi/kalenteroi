@@ -1,3 +1,4 @@
+// @ts-ignore - json-url is not typed
 import * as jsonUrl from "json-url";
 
 export const encode = (data: any) => {

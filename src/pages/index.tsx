@@ -5,24 +5,41 @@ import {
   FormLabel,
   Heading,
   Input,
+  InputProps,
   Textarea,
+  TextareaProps,
 } from "@chakra-ui/react";
-import { Field, Form, Formik, FieldAttributes } from "formik";
-import { decode, encode } from "@/utils/json";
+import { Field, Form, Formik, FieldProps } from "formik";
+import { encode } from "@/utils/json";
 import { useRouter } from "next/router";
 
-type FormValues = any;
+export interface FormValues {
+  title: string;
+  description?: string;
+  start: string;
+  end?: string;
+  location?: string;
+}
 
 const Home = () => {
   const router = useRouter();
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: FormValues) => {
     const encoded = await encode(values);
     router.push(`/${encoded}`);
   };
 
   return (
-    <Formik<FormValues> initialValues={{ title: "" }} onSubmit={handleSubmit}>
+    <Formik<FormValues>
+      initialValues={{
+        title: "",
+        description: undefined,
+        start: new Date().toISOString(),
+        end: undefined,
+        location: undefined,
+      }}
+      onSubmit={handleSubmit}
+    >
       {(props) => (
         <Form style={{ width: "100%" }}>
           <Heading size="md" w="full" textAlign="center">
@@ -30,46 +47,46 @@ const Home = () => {
           </Heading>
 
           <Field name="title">
-            {({ field }: FieldAttributes<FormValues>) => (
+            {({ field }: FieldProps<FormValues>) => (
               <FormControl>
                 <FormLabel>Tapahtuman nimi</FormLabel>
-                <Input {...field}></Input>
+                <Input {...(field as unknown as InputProps)}></Input>
               </FormControl>
             )}
           </Field>
 
           <Field name="description">
-            {({ field }: FieldAttributes<FormValues>) => (
+            {({ field }: FieldProps<FormValues>) => (
               <FormControl>
                 <FormLabel>Kuvaus</FormLabel>
-                <Textarea {...field}></Textarea>
+                <Textarea {...(field as unknown as TextareaProps)}></Textarea>
               </FormControl>
             )}
           </Field>
 
           <Field name="start">
-            {({ field }: FieldAttributes<FormValues>) => (
+            {({ field }: FieldProps<FormValues>) => (
               <FormControl>
                 <FormLabel>Alkaa</FormLabel>
-                <Input {...field}></Input>
+                <Input {...(field as unknown as InputProps)}></Input>
               </FormControl>
             )}
           </Field>
 
           <Field name="end">
-            {({ field }: FieldAttributes<FormValues>) => (
+            {({ field }: FieldProps<FormValues>) => (
               <FormControl>
                 <FormLabel>Päättyy</FormLabel>
-                <Input {...field}></Input>
+                <Input {...(field as unknown as InputProps)}></Input>
               </FormControl>
             )}
           </Field>
 
           <Field name="location">
-            {({ field }: FieldAttributes<FormValues>) => (
+            {({ field }: FieldProps<FormValues>) => (
               <FormControl>
                 <FormLabel>Paikka</FormLabel>
-                <Input {...field}></Input>
+                <Input {...(field as unknown as InputProps)}></Input>
               </FormControl>
             )}
           </Field>
