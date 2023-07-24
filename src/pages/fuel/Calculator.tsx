@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocalStorage } from "usehooks-ts";
 import {
+  Button,
   FormControl,
   FormLabel,
   Input,
@@ -57,6 +58,7 @@ const Calculator = () => {
           </NumberInputStepper>
         </NumberInput>
         <Slider
+          mt="3"
           value={consumption}
           onChange={setConsumption}
           step={0.1}
@@ -84,6 +86,7 @@ const Calculator = () => {
           </NumberInputStepper>
         </NumberInput>
         <Slider
+          mt="3"
           value={price}
           onChange={setPrice}
           step={0.01}
@@ -110,6 +113,9 @@ const Calculator = () => {
           style={{ textAlign: "center" }}
         />
       </FormControl>
+      <Button onClick={() => window.open("mobilepayfi://", "_blank")}>
+        Avaa MobilePay
+      </Button>
     </>
   );
 };
