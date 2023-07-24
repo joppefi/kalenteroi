@@ -107,6 +107,7 @@ const Calculator = () => {
         <Input
           size="sm"
           value={((distance / 100) * consumption).toFixed(2)}
+          readOnly
           style={{ textAlign: "center" }}
         />
       </FormControl>
@@ -114,6 +115,7 @@ const Calculator = () => {
         <FormLabel>Hinta yht.</FormLabel>
         <Input
           value={((distance / 100) * consumption * price).toFixed(2)}
+          readOnly
           style={{ textAlign: "center" }}
         />
       </FormControl>
