@@ -28,6 +28,10 @@ const Calculator = () => {
     setDistance(Number.isNaN(valueAsNumber) ? 0 : valueAsNumber);
   };
 
+  const openMobilePay = () => {
+    window.open("mobilepayfi://");
+  };
+
   return (
     <>
       <FormControl>
@@ -113,9 +117,7 @@ const Calculator = () => {
           style={{ textAlign: "center" }}
         />
       </FormControl>
-      <Button onClick={() => window.open("mobilepayfi://", "_blank")}>
-        Avaa MobilePay
-      </Button>
+      <Button onClick={openMobilePay}>Avaa MobilePay</Button>
     </>
   );
 };
