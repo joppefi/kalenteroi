@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useLocalStorage } from "usehooks-ts";
 import {
   FormControl,
   FormLabel,
@@ -9,15 +10,14 @@ import {
   NumberInputField,
   NumberInputStepper,
   Slider,
-  SliderFilledTrack,
   SliderThumb,
   SliderTrack,
 } from "@chakra-ui/react";
 
 const Calculator = () => {
-  const [distance, setDistance] = useState(0);
-  const [consumption, setConsumption] = useState(0);
-  const [price, setPrice] = useState(0);
+  const [distance, setDistance] = useLocalStorage("distance", 0);
+  const [consumption, setConsumption] = useLocalStorage("consumption", 0);
+  const [price, setPrice] = useLocalStorage("price", 2);
 
   return (
     <>
@@ -60,10 +60,9 @@ const Calculator = () => {
           step={0.1}
           min={3}
           max={10}
+          size="lg"
         >
-          <SliderTrack>
-            <SliderFilledTrack />
-          </SliderTrack>
+          <SliderTrack />
           <SliderThumb />
         </Slider>
       </FormControl>
@@ -85,13 +84,12 @@ const Calculator = () => {
         <Slider
           value={price}
           onChange={setPrice}
-          step={0.001}
+          step={0.01}
           min={1.8}
           max={2.2}
+          size="lg"
         >
-          <SliderTrack>
-            <SliderFilledTrack />
-          </SliderTrack>
+          <SliderTrack />
           <SliderThumb />
         </Slider>
       </FormControl>
