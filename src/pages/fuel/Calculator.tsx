@@ -8,6 +8,7 @@ import {
   NumberIncrementStepper,
   NumberInput,
   NumberInputField,
+  NumberInputProps,
   NumberInputStepper,
   Slider,
   SliderThumb,
@@ -15,21 +16,22 @@ import {
 } from "@chakra-ui/react";
 
 const Calculator = () => {
-  const [distance, setDistance] = useLocalStorage("distance", 0);
-  const [consumption, setConsumption] = useLocalStorage("consumption", 0);
-  const [price, setPrice] = useLocalStorage("price", 2);
+  const [distance, setDistance] = useLocalStorage("fuel:distance", 0);
+  const [consumption, setConsumption] = useLocalStorage("fuel:consumption", 0);
+  const [price, setPrice] = useLocalStorage("fuel:price", 2);
+
+  const handleDistance: NumberInputProps["onChange"] = (
+    valueAsString,
+    valueAsNumber
+  ) => {
+    setDistance(Number.isNaN(valueAsNumber) ? 0 : valueAsNumber);
+  };
 
   return (
     <>
       <FormControl>
         <FormLabel>Matka (km)</FormLabel>
-        <NumberInput
-          size="sm"
-          value={distance}
-          onChange={(valueAsString, valueAsNumber) =>
-            setDistance(valueAsNumber)
-          }
-        >
+        <NumberInput size="sm" value={distance} onChange={handleDistance}>
           <NumberInputField style={{ textAlign: "center" }} />
           <NumberInputStepper>
             <NumberIncrementStepper />
